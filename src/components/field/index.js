@@ -49,6 +49,8 @@ export default class TextField extends PureComponent {
     disabled: false,
     disabledLineType: 'dotted',
     disabledLineWidth: 1,
+
+    errorDoubleLine: false
   };
 
   static propTypes = {
@@ -93,6 +95,8 @@ export default class TextField extends PureComponent {
 
     containerStyle: (ViewPropTypes || View.propTypes).style,
     inputContainerStyle: (ViewPropTypes || View.propTypes).style,
+
+    errorDoubleLine: PropTypes.bool
   };
 
   constructor(props) {
@@ -352,6 +356,7 @@ export default class TextField extends PureComponent {
       containerStyle,
       inputContainerStyle: inputContainerStyleOverrides,
       clearTextOnFocus,
+      errorDoubleLine,
       ...props
     } = this.props;
 
@@ -539,7 +544,7 @@ export default class TextField extends PureComponent {
 
         <Animated.View style={helperContainerStyle}>
           <View style={styles.flex}>
-            <Helper style={[errorStyle, titleTextStyle]}>{error}</Helper>
+            <Helper style={[errorStyle, titleTextStyle]} numberOfLines={errorDoubleLine ? 2 : 1}>{error}</Helper>
             <Helper style={[titleStyle, titleTextStyle]}>{title}</Helper>
           </View>
 
